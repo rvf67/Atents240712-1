@@ -2,6 +2,16 @@
 {
     internal class Program
     {
+        enum AgeCategory
+        {
+            Child = 0,
+            Elemetry,
+            Middle,
+            High,
+            Adult
+        }
+
+
         int Test(int a, int b, float c)
         {
             int result = 10;
@@ -65,32 +75,32 @@
 
             // 제어문(Control Statement)
 
-            int age;
-            Console.Write("나이를 입력해 주세요 : ");
-            string ageString = Console.ReadLine();
-            age = int.Parse(ageString);
+            //int age;
+            //Console.Write("나이를 입력해 주세요 : ");
+            //string ageString = Console.ReadLine();
+            //age = int.Parse(ageString);
 
-            // if : () 사이에 있는 조건이 true면 {} 사이에 있는 코드를 실행한다.
-            if(age > 20)
-            {
-                Console.WriteLine("성인입니다.");
-            }
+            //// if : () 사이에 있는 조건이 true면 {} 사이에 있는 코드를 실행한다.
+            //if(age > 20)
+            //{
+            //    Console.WriteLine("성인입니다.");
+            //}
 
-            //if(age <= 20) // 비추천. 두번 확인함.
-            if (age < 21)
-            {
-                Console.WriteLine("미성년자입니다.");
-            }
+            ////if(age <= 20) // 비추천. 두번 확인함.
+            //if (age < 21)
+            //{
+            //    Console.WriteLine("미성년자입니다.");
+            //}
 
-            // if-else : () 사이에 있는 조건이 true면 if아래에 있는 {} 사이의 코드를 실행, false면 else 아래에 있는 {} 사이의 코드를 실행
-            if(age > 20)
-            {
-                Console.WriteLine("성인입니다.");
-            }
-            else
-            {
-                Console.WriteLine("미성년자입니다.");
-            }
+            //// if-else : () 사이에 있는 조건이 true면 if아래에 있는 {} 사이의 코드를 실행, false면 else 아래에 있는 {} 사이의 코드를 실행
+            //if(age > 20)
+            //{
+            //    Console.WriteLine("성인입니다.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("미성년자입니다.");
+            //}
 
             // 실습
             // 1. 나이를 입력받기
@@ -98,7 +108,102 @@
             // 3. 13살 미만이면 "초등학생입니다" 출력
             // 4. 16살 미만이면 "중학생입니다" 출력
             // 5. 19살 미만이면 "고등학생입니다" 출력
-            
+
+            //int age = 0;
+            //Console.Write("나이를 입력하세요 : ");
+            //string ageString = Console.ReadLine();
+            //age = int.Parse(ageString);
+            //int categoty = 0;       // 매직넘버 : 안쓰는게 좋다.
+            //AgeCategory ageCategory;
+
+            //if (age < 8)
+            //{
+            //    Console.WriteLine("미취학 아동입니다.");
+            //    categoty = 0;
+            //    ageCategory = AgeCategory.Child;
+            //}
+            //else if(age < 13)
+            //{
+            //    Console.WriteLine("초등학생입니다.");
+            //    categoty = 1;
+            //    ageCategory = AgeCategory.Elemetry;
+            //}
+            //else if (age < 16)
+            //{
+            //    Console.WriteLine("중학생입니다.");
+            //    categoty = 2;
+            //    ageCategory = AgeCategory.Middle;
+            //}
+            //else if (age < 19)
+            //{
+            //    Console.WriteLine("고등학생입니다.");
+            //    categoty = 3;
+            //    ageCategory = AgeCategory.High;
+            //}
+            //else
+            //{
+            //    Console.WriteLine("성인입니다.");
+            //    categoty = 4;
+            //    ageCategory = AgeCategory.Adult;
+            //}
+
+            //// switch : () 사이에 있는 값에 따라 다른 코드를 수행하는 조건문
+            ////switch(categoty)
+            ////{
+            ////    case 0:
+            ////        Console.WriteLine("미취학 아동은 1000원입니다.");
+            ////        break;
+            ////    case 1:
+            ////        Console.WriteLine("초등학생은 2000원입니다.");
+            ////        break;
+            ////    case 2:
+            ////        Console.WriteLine("중학생은 3000원입니다.");
+            ////        break;
+            ////    case 3:
+            ////        Console.WriteLine("고등학생은 5000원입니다.");
+            ////        break;
+            ////    case 4:
+            ////        Console.WriteLine("성인은 10000원입니다.");
+            ////        break;
+            ////}
+
+            //switch (ageCategory)
+            //{
+            //    case AgeCategory.Child:
+            //        Console.WriteLine("미취학 아동은 1000원입니다.");
+            //        break;
+            //    case AgeCategory.Elemetry:
+            //        Console.WriteLine("초등학생은 1000원입니다.");
+            //        break;
+            //    case AgeCategory.Middle:
+            //        Console.WriteLine("중학생은 3000원입니다.");
+            //        break;
+            //    case AgeCategory.High:
+            //        Console.WriteLine("고등학생은 5000원입니다.");
+            //        break;
+            //    case AgeCategory.Adult:
+            //        Console.WriteLine("성인은 10000원입니다.");
+            //        break;
+            //    default:
+            //        break;
+            //}
+
+            //int point = int.Parse(Console.ReadLine());
+            int point;
+            if( int.TryParse(Console.ReadLine(), out point) )
+            {
+                Console.WriteLine("정상 변환");
+            }
+            else
+            {
+                Console.WriteLine("변환 실패");
+            }
+
+            Console.WriteLine(AgeCategory.Child);
+
+            // 실습
+            // 1. 성적용 enum 만들기(A,B,C,D,F)
+            // 2. 점수를 입력 받아서 90점 이상이면 A, 80 이상이면 B, 70점 이상이면 C, 60점 이상이면 D, 60점 미만이면 F를 주기
 
 
 
