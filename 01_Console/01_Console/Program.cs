@@ -11,6 +11,14 @@
             Adult
         }
 
+        enum PointGrade
+        {
+            A,
+            B,
+            C,
+            D,
+            F
+        }
 
         int Test(int a, int b, float c)
         {
@@ -73,7 +81,7 @@
             //PrintMyData(name, ageString, address);
             ////Console.WriteLine($"저는 {address}에 사는 {name}({ageString})입니다.");
 
-            // 제어문(Control Statement)
+            // 제어문(Control Statement) - 조건문(if, if-else, switch), 반복문
 
             //int age;
             //Console.Write("나이를 입력해 주세요 : ");
@@ -188,25 +196,79 @@
             //        break;
             //}
 
-            //int point = int.Parse(Console.ReadLine());
-            int point;
-            if( int.TryParse(Console.ReadLine(), out point) )
-            {
-                Console.WriteLine("정상 변환");
-            }
-            else
-            {
-                Console.WriteLine("변환 실패");
-            }
+            ////int point = int.Parse(Console.ReadLine());
+            ////int point;
+            //PointGrade pointGrade = PointGrade.F;
+            //Console.Write("점수를 입력해 주세요 : ");
+            //if( int.TryParse(Console.ReadLine(), out int point) )
+            //{
+            //    if( point > 89 )
+            //    {
+            //        pointGrade = PointGrade.A;
+            //    }
+            //    else if( point > 79 )
+            //    {
+            //        pointGrade = PointGrade.B;
+            //    }
+            //    else if ( point > 69 )
+            //    {
+            //        pointGrade = PointGrade.C;
+            //    }
+            //    else if( point > 59 )
+            //    {
+            //        pointGrade = PointGrade.D;
+            //    }
 
-            Console.WriteLine(AgeCategory.Child);
+            //    //switch (pointGrade)
+            //    //{
+            //    //    case PointGrade.A:
+            //    //        break;
+            //    //    case PointGrade.B:
+            //    //        break;
+            //    //    case PointGrade.C:
+            //    //        break;
+            //    //    case PointGrade.D:
+            //    //        break;
+            //    //    case PointGrade.F:
+            //    //        break;
+            //    //}
 
-            // 실습
-            // 1. 성적용 enum 만들기(A,B,C,D,F)
-            // 2. 점수를 입력 받아서 90점 이상이면 A, 80 이상이면 B, 70점 이상이면 C, 60점 이상이면 D, 60점 미만이면 F를 주기
+            //    Console.WriteLine($"당신의 성적은 {pointGrade}입니다.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("변환 실패");
+            //}
 
+            //// 실습
+            //// 1. 성적용 enum 만들기(A,B,C,D,F)
+            //// 2. 점수를 입력 받아서 90점 이상이면 A, 80 이상이면 B, 70점 이상이면 C, 60점 이상이면 D, 60점 미만이면 F를 주기
 
-
+            // 연산자(operator)
+            // 산술연산자 : + - * / %, 산수 계산하는데 사용되는 연산자들
+            // 대입연산자 : =, = 오른쪽에 있는 값을 왼쪽 변수에 대입하는 연산자
+            // 비교연산자 : <, >, <=, >=, ==(같다), !=(다르다), 항상 결과는 true 아니면 false
+            //             !!!!!절대로 float같은 실수 타입은 ==로 비교해서는 안된다.
+            // 논리연산자 : &&(and, 연산자의 오른쪽과 왼쪽이 모두 true일 때만 true), ||(or, 둘중 하나만 true면 true), 항상 결과는 true아니면 false. 
+            //              true  && true;  // true
+            //              true  && false; // false 
+            //              false && true;  // false
+            //              false && false; // false
+            //              true  || true;  // true
+            //              true  || false; // true
+            //              false || true;  // true
+            //              false || false; // false
+            // 비트연산자 : &(and, 오른쪽에 있는 비트와 왼쪽에 있는 비트가 모두 1일때 1), |(or, 오른쪽에 있는 비트와 왼쪽에 있는 비트가 하나만 1이면 1)
+            //              int a = 123;
+            //              a = 0b_0111_1011;   // 이진수로 쓴 123
+            //              int b1 = 0b_1010;
+            //              int b2 = 0b_1100;
+            //              int c1 = b1 & b2;   // 0b_1000
+            //              int c2 = b1 | b2;   // 0b_1110
+            // 증감연산자 : ++, --, +=, -=, *=, /=
+            //              a++; a = a + 1; 
+            //              a--; a = a -1;
+            //              a += 10; a = a + 10;
 
 
             //// 7/12--------------------------------------------------------------------------------------
