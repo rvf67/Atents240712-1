@@ -1,5 +1,53 @@
-﻿namespace _01_Console
+﻿using System.Collections;
+
+namespace _01_Console
 {
+    // C#의 메모리구조
+    // 구분 : Heap 메모리, Stack 메모리
+    // Heap : 운영체제가 관리하는 메모리, 크기가 매우 크다. 속도가 느리다. class가 저장됨, 참조타입
+    // Stack : 프로그램이 실행되었을 때 이미 할당 받은 메모리. 크기가 작다. 속도가 빠르다. struct(구조체)가 저장됨, 값타입
+
+    // 복사 방식 : 깊은복사(완전한 사본을 만드는 것), 얕은복사(주소만 넘겨주는 것)
+
+    // 참조타입(Reference type) : 얕은 복사. 복사속도가 빠르다. 실체는 1개만 있다.
+    // 값타입(Value type) : 깊은 복사. 복사속도는 느리다. 실체가 복사한만큼 생긴다.
+
+
+    // static : 정적. 프로그램이 실행되기 전에 결정되어 있는 것
+    // dynamic : 동적. 프로그램 실행 중에 결정되는 것
+
+
+    public class TestClass
+    {
+        // 접근제한자(Access Modifier)
+        private int value1;     // private : 나만 사용할 수 있다.
+        protected int value2;   // protected : 나와 나를 상속받은 곳에서만 사용할 수 있다.
+        public int value3;      // public : 모두가 사용할 수 있다.
+
+        void Test()
+        {
+            int a = 10;
+            int b = a;
+
+            b = 20;
+            //ArrayList array = new ArrayList();
+            //array.Add(10);
+            //array.Add(10.5f);
+            //array.Add("Hello");
+        }
+    }
+
+    public class TestChildClass : TestClass
+    {
+        void Test2()
+        {
+            TestClass a = new TestClass();
+            a.value3 = 10;
+            TestClass b = a;
+            b.value3 = 20;
+        }
+    }
+
     internal class Program
     {
         enum AgeCategory
@@ -36,8 +84,80 @@
             Console.WriteLine($"저는 {address}에 사는 {name}({age})입니다.");
         }
 
+        static void GuGuDan(int dan)
+        {
+            Console.WriteLine($"{dan}단을 출력합니다.");
+            for (int i = 1; i < 10; i++)
+            {
+                Console.WriteLine($"{dan} * {i} = {dan * i}");
+            }
+        }
+
         static void Main(string[] args)
         {
+            // 7/16--------------------------------------------------------------------------------------
+
+            // 반복문
+            //int count = 0;
+            //while(count < 3)        // while : ()사이의 조건이 참이면 계속 반복해서 {}안의 내용을 실행
+            //{
+            //    Console.WriteLine("Hello");
+            //    count++;
+            //}
+
+            //Console.WriteLine("-----------------------");
+            //count = 0;
+            //do
+            //{
+            //    Console.WriteLine("Hello");
+            //    count++;
+            //} while (count < 3);    // do-while : 우선 {} 사이의 코드를 실행하고 ()사이의 조건이 참이면 {}를 반복 실행한다.
+
+            //Console.WriteLine("-----------------------");
+            //for(int i=0;i<3;i++)    // for(초기화;조건부;증감부)
+            //{
+            //    Console.WriteLine("Hello");
+            //}
+
+            //Console.WriteLine("-----------------------");
+            //// 배열(Array) : 같은 종류의 데이터타입을 가지는 값들을 하나로 묶어놓은 것
+            //int[] intArray;
+            //intArray = new int[3];
+            //intArray[0] = 1;
+            //intArray[1] = 2;
+            //intArray[2] = 3;
+            ////intArray[3] = 4;  // index out of range exception!!!!
+
+            //foreach(int i in intArray)
+            //{
+            //    Console.WriteLine($"Hello - {i}");
+            //}
+
+            // 구구단 출력하기
+            // 1. 숫자입력받기(숫자 변경 실패하면 다시 받기)
+            // 2. 입력 받은 숫자의 구구단 출력하기
+            // 3. 파라메터로 받은 숫자의 구구단 출력하는 함수 만들기
+
+            bool isSuccess = false;
+            int result = 0;
+            do
+            {
+                Console.Write("단수를 입력하세요 : ");
+                isSuccess = int.TryParse(Console.ReadLine(), out result);
+            } while (!isSuccess);
+
+            Console.WriteLine($"{result}단을 출력합니다.");
+            for(int i = 1 ; i<10 ; i++)
+            {
+                Console.WriteLine($"{result} * {i} = {result * i}");
+            }
+
+            GuGuDan(result);
+
+            TestClass aaa = new TestClass();
+            aaa.value3 = 10;
+            TestClass bbb = new TestClass();
+
             // 7/15--------------------------------------------------------------------------------------
             //Console.WriteLine("저는 고병조입니다. 나이는 43살입니다.");
             //int age = 43;
