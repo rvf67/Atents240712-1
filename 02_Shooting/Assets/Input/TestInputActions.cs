@@ -89,6 +89,15 @@ public partial class @TestInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestWASD"",
+                    ""type"": ""Value"",
+                    ""id"": ""44ef5570-7958-4b3c-9986-09373099c98f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -168,6 +177,61 @@ public partial class @TestInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""RClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""41a02bb8-426d-437f-b31c-a8ce27e7102b"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TestWASD"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""83d6c7aa-b8b3-4a3e-8595-aefdb2da72b0"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""TestWASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8d245a96-eeeb-4a30-b5cc-261a64aa4cdf"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""TestWASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""2c1e8ed8-f028-45d3-90be-c61b98d462c1"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""TestWASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c3458ba7-83ae-46b9-a6d8-3e9a1679e984"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""TestWASD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -200,6 +264,7 @@ public partial class @TestInputActions: IInputActionCollection2, IDisposable
         m_Test_Test5 = m_Test.FindAction("Test5", throwIfNotFound: true);
         m_Test_LClick = m_Test.FindAction("LClick", throwIfNotFound: true);
         m_Test_RClick = m_Test.FindAction("RClick", throwIfNotFound: true);
+        m_Test_TestWASD = m_Test.FindAction("TestWASD", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -268,6 +333,7 @@ public partial class @TestInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Test_Test5;
     private readonly InputAction m_Test_LClick;
     private readonly InputAction m_Test_RClick;
+    private readonly InputAction m_Test_TestWASD;
     public struct TestActions
     {
         private @TestInputActions m_Wrapper;
@@ -279,6 +345,7 @@ public partial class @TestInputActions: IInputActionCollection2, IDisposable
         public InputAction @Test5 => m_Wrapper.m_Test_Test5;
         public InputAction @LClick => m_Wrapper.m_Test_LClick;
         public InputAction @RClick => m_Wrapper.m_Test_RClick;
+        public InputAction @TestWASD => m_Wrapper.m_Test_TestWASD;
         public InputActionMap Get() { return m_Wrapper.m_Test; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -309,6 +376,9 @@ public partial class @TestInputActions: IInputActionCollection2, IDisposable
             @RClick.started += instance.OnRClick;
             @RClick.performed += instance.OnRClick;
             @RClick.canceled += instance.OnRClick;
+            @TestWASD.started += instance.OnTestWASD;
+            @TestWASD.performed += instance.OnTestWASD;
+            @TestWASD.canceled += instance.OnTestWASD;
         }
 
         private void UnregisterCallbacks(ITestActions instance)
@@ -334,6 +404,9 @@ public partial class @TestInputActions: IInputActionCollection2, IDisposable
             @RClick.started -= instance.OnRClick;
             @RClick.performed -= instance.OnRClick;
             @RClick.canceled -= instance.OnRClick;
+            @TestWASD.started -= instance.OnTestWASD;
+            @TestWASD.performed -= instance.OnTestWASD;
+            @TestWASD.canceled -= instance.OnTestWASD;
         }
 
         public void RemoveCallbacks(ITestActions instance)
@@ -369,5 +442,6 @@ public partial class @TestInputActions: IInputActionCollection2, IDisposable
         void OnTest5(InputAction.CallbackContext context);
         void OnLClick(InputAction.CallbackContext context);
         void OnRClick(InputAction.CallbackContext context);
+        void OnTestWASD(InputAction.CallbackContext context);
     }
 }
