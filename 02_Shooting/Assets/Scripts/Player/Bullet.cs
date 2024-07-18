@@ -4,7 +4,20 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    /// <summary>
+    /// 총알의 이동속도
+    /// </summary>
     public float moveSpeed = 7.0f;
+
+    /// <summary>
+    /// 총알의 수명
+    /// </summary>
+    public float lifeTime = 10.0f;
+
+    private void Start()
+    {
+        Destroy(gameObject, lifeTime);
+    }
 
     // 실습
     // 1. 게임을 시작하면 총알이 로컬의 오른쪽으로 계속 날아가게 만들기
