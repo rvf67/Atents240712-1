@@ -61,7 +61,9 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        transform.position += (Time.deltaTime * moveSpeed * inputDirection);    // 초당 moveSpeed의 속도로 inputDirection 방향으로 이동
+        //transform.position += (Time.deltaTime * moveSpeed * inputDirection);    // 초당 moveSpeed의 속도로 inputDirection 방향으로 이동
         //transform.position += (inputDirection * moveSpeed * Time.deltaTime);  // 위에 코드는 4번 곱하지만 이 코드는 6번 곱한다.
+
+        transform.Translate(Time.deltaTime * moveSpeed * inputDirection);
     }
 }
