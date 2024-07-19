@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
     /// <param name="_">입력 정보(사용하지 않아서 칸만 잡아놓은 것)</param>
     private void OnFireStart(InputAction.CallbackContext _)
     {
-        Debug.Log("발사 시작");
+        //Debug.Log("발사 시작");
         //Fire();
         //StartCoroutine("FireCoroutine");
         //StartCoroutine(FireCoroutine());
@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
 
     private void OnFireEnd(InputAction.CallbackContext _)
     {
-        Debug.Log("발사 종료");
+        //Debug.Log("발사 종료");
         //StopAllCoroutines();    // 모든 코루틴 정지시키기
         //StopCoroutine("FireCoroutine");
         //StopCoroutine(FireCoroutine());
