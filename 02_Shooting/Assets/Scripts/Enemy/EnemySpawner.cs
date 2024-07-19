@@ -90,7 +90,23 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // 빨간색 사각형 그리기
-        
+        // 빨간색 사각형 그리기(가로1, 높이8)
+        Gizmos.color = Color.red;
+
+        //new Color(1, 1, 1); // 흰색
+        //new Color(1, 0, 0); // 빨간색
+        //new Color(0, 1, 0); // 녹색
+        //new Color(0, 0, 1); // 파란색
+
+        Vector3 p0 = transform.position + MaxY * Vector3.up  + 0.5f * Vector3.left;
+        Vector3 p1 = transform.position + MaxY * Vector3.up  + 0.5f * Vector3.right;
+        Vector3 p2 = transform.position + MinY * Vector3.up + 0.5f * Vector3.right;
+        Vector3 p3 = transform.position + MinY * Vector3.up + 0.5f * Vector3.left;
+        Gizmos.DrawLine(p0, p1);
+        Gizmos.DrawLine(p1, p2);
+        Gizmos.DrawLine(p2, p3);
+        Gizmos.DrawLine(p3, p0);
+
+
     }
 }
