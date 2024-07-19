@@ -57,6 +57,11 @@ public class Player : MonoBehaviour
     /// </summary>
     GameObject fireFlash;
 
+    /// <summary>
+    /// 총알 발사 이팩트가 보일 시간용
+    /// </summary>
+    WaitForSeconds flashWait;
+
     private void Awake()
     {
         inputActions = new PlayerInputActions();    // 인풋 액션 생성
@@ -67,6 +72,8 @@ public class Player : MonoBehaviour
         fireFlash = transform.GetChild(1).gameObject;   // 두번째 자식 찾아서 그 자식의 게임 오브젝트 저장하기
 
         fireCoroutine = FireCoroutine();            // 코루틴 저장하기
+
+        flashWait = new WaitForSeconds(0.1f);       // 총알 발사용 이팩트는 0.1초 동안만 보인다.
     }
 
     private void OnEnable()
@@ -166,10 +173,14 @@ public class Player : MonoBehaviour
         // yield return new WaitForEndOfFrame();
     }
 
+    /// <summary>
+    /// 발사 이팩트용 코루틴
+    /// </summary>
+    /// <returns></returns>
     IEnumerator FlashEffect()
     {
         fireFlash.SetActive(true);  // 게임 오브젝트 활성화하기
-        yield return new WaitForSeconds(0.1f);
+        yield return flashWait;     // 잠깐 딜레이 걸기
         fireFlash.SetActive(false);
     }
 }
