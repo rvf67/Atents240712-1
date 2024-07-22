@@ -103,6 +103,7 @@ MonoBehaviour:
   moveSpeed: 3
   frequency: 2
   amplitude: 3
+  explosionEffect: {fileID: 6778856093152883138, guid: 2da783ff44dd1de40a0a0ec7d0ddbc66, type: 3}
 --- !u!95 &9169240634837521678
 Animator:
   serializedVersion: 5
