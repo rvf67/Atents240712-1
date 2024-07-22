@@ -34,6 +34,36 @@ public class Enemy : MonoBehaviour
     /// </summary>
     float spawnY = 0.0f;
 
+    /// <summary>
+    /// 적의 HP
+    /// </summary>
+    int hp = 2;
+
+    /// <summary>
+    /// 적의 HP를 get/set할 수 있는 프로퍼티
+    /// </summary>
+    public int HP
+    {
+        //get
+        //{
+        //    return hp;
+        //}
+        get => hp;          // 읽기는 public
+        private set         // 쓰기는 private
+        {
+            hp = value;
+            if(hp < 1)      // 0이되면
+            {
+                OnDie();    // 사망 처리 수행
+            }
+        }
+    }
+
+    /// <summary>
+    /// 이 적을 죽였을 때 얻는 점수
+    /// </summary>
+    public int point = 10;
+
     // 실습
     // 1. 계속 월드의 왼쪽으로 움직인다.
     // 2. 위아래로 일정범위를 물결치듯이 움직인다.
@@ -52,7 +82,12 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        OnDie();
+        //hp--;
+        //if (hp <= 0)
+        //{
+        //    OnDie();
+        //}
+        HP--;        //HP = HP - 1;  // HP를 get한 다음 -1을 처리하고 다시 set하기
     }
 
     /// <summary>
