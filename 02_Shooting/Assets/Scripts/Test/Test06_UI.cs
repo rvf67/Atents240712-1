@@ -27,4 +27,11 @@ public class Test06_UI : TestBase
         ScoreText scoreText = FindAnyObjectByType<ScoreText>();
         scoreText.Score += score;
     }
+
+    protected override void OnTest2(InputAction.CallbackContext context)
+    {
+        int score = 1000;
+        ScoreText scoreText = FindAnyObjectByType<ScoreText>();
+        scoreText.Score += score;
+    }
 }
