@@ -60,6 +60,11 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
+    /// 생존 여부를 표현하는 변수
+    /// </summary>
+    bool isAlive = true;
+
+    /// <summary>
     /// 이 적을 죽였을 때 얻는 점수
     /// </summary>
     public int point = 10;
@@ -110,12 +115,15 @@ public class Enemy : MonoBehaviour
     /// </summary>
     void OnDie()
     {
-        ScoreText scoreText = FindAnyObjectByType<ScoreText>();
-        scoreText.Score += point;
+        if(isAlive) // 살아있을 때만 죽을 수 있음
+        {
+            isAlive = false;            // 죽었다고 표시
 
-        // 터지는 이팩트 나오기
-        // 자기 자신 삭제
-        Instantiate(explosionEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+            ScoreText scoreText = FindAnyObjectByType<ScoreText>();
+            scoreText.AddScore(point);   // 점수 증가
+        
+            Instantiate(explosionEffect, transform.position, Quaternion.identity);  // 터지는 이팩트 나오기
+            Destroy(gameObject);        // 자기 자신 삭제
+        }
     }
 }

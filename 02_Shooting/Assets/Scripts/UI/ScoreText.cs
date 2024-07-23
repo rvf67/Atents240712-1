@@ -31,10 +31,13 @@ public class ScoreText : MonoBehaviour
     /// </summary>
     float displayScore = 0.0f;
 
+    /// <summary>
+    /// 점수 확인용 프로퍼티(읽기 전용)
+    /// </summary>
     public int Score
     {
         get => goalScore;
-        set
+        private set     // private에서는 설정 가능
         {
             goalScore = value;
             //score.text = $"Score : {goalScore,5}";    // 5자리로 출력, 공백은 스페이스
@@ -52,6 +55,9 @@ public class ScoreText : MonoBehaviour
         //TextMeshProUGUI[] result = GetComponentsInChildren<TextMeshProUGUI>();    // 자신과 자신의 모든 자식에 들어있는 TextMeshProUGUI 찾기
     }
 
+    // 실습
+    // 1. 점수가 바로 적용되는 것이 아니라 천천히 증가되게 만들어보기
+    // 2. 보이는 점수와 실제 점수의 차이가 크면 클수록 빠르게 증가한다.
     void Update()
     {
         // displayScore가 goalScore로 될 때까지 계속 증가시키기
@@ -75,8 +81,12 @@ public class ScoreText : MonoBehaviour
         }
     }
 
-
-    // 실습
-    // 1. 점수가 바로 적용되는 것이 아니라 천천히 증가되게 만들어보기
-    // 2. 보이는 점수와 실제 점수의 차이가 크면 클수록 빠르게 증가한다.
+    /// <summary>
+    /// 점수를 증가시키는 함수
+    /// </summary>
+    /// <param name="point">증가시킬 양</param>
+    public void AddScore(int point)
+    {
+        Score += point;
+    }
 }
