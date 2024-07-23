@@ -18,11 +18,15 @@ public class Test07_Singleton : TestBase
         test3.TestPrint();
 
         //TestSingleton.Instance.test = 20;
-
     }
 
     protected override void OnTest1(InputAction.CallbackContext context)
     {
-        Debug.Log(Factory.Instance.gameObject);
+        Debug.Log(SimpleFactory.Instance.gameObject);
+    }
+
+    protected override void OnTest2(InputAction.CallbackContext context)
+    {
+        SimpleFactory.Instance.GetBullet(new Vector3(0,1,0), 45);
     }
 }
