@@ -110,9 +110,11 @@ public class Enemy : MonoBehaviour
     /// </summary>
     void OnDie()
     {
+        ScoreText scoreText = FindAnyObjectByType<ScoreText>();
+        scoreText.Score += point;
+
         // 터지는 이팩트 나오기
         // 자기 자신 삭제
-
         Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
