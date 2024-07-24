@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : RecycleObject
 {
+    /// <summary>
+    /// 적의 수명
+    /// </summary>
+    public float lifeTime = 30.0f;
+
     /// <summary>
     /// 이동 속도
     /// </summary>
@@ -80,6 +85,12 @@ public class Enemy : MonoBehaviour
         spawnY = transform.position.y;      // 시작 위치 기록하기
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        DisableTimer(lifeTime);
+    }
+
     private void Update()
     {
         MoveUpdate(Time.deltaTime);         // 이동 업데이트 처리
@@ -123,7 +134,8 @@ public class Enemy : MonoBehaviour
             scoreText.AddScore(point);   // 점수 증가
         
             Instantiate(explosionEffect, transform.position, Quaternion.identity);  // 터지는 이팩트 나오기
-            Destroy(gameObject);        // 자기 자신 삭제
+            //Destroy(gameObject);        // 자기 자신 삭제
+            DisableTimer();
         }
     }
 }
