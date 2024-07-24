@@ -21,7 +21,8 @@ public class Bullet : RecycleObject
 
     private void Start()
     {
-        Destroy(gameObject, lifeTime);
+        //Destroy(gameObject, lifeTime);
+        DisableTimer(lifeTime);
     }
 
     // 실습
