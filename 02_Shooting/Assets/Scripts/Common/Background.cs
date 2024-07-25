@@ -27,7 +27,7 @@ public class Background : MonoBehaviour
     /// </summary>
     float baseLineX;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         bgSlots = new Transform[transform.childCount];      // 슬롯의 트랜스폼을 저장하기 위한 배열 만들기
         for(int i=0;i<bgSlots.Length;i++)
