@@ -8,6 +8,7 @@ public class Factory : Singleton<Factory>
     EnemyPool enemy;
     HitEffectPool hit;
     ExplosionEffectPool explosion;
+    AsteroidPool asteroid;
 
     protected override void OnInitialize()
     {
@@ -27,6 +28,9 @@ public class Factory : Singleton<Factory>
         explosion = GetComponentInChildren<ExplosionEffectPool>();
         if (explosion != null) 
             explosion.Initialize();
+
+        asteroid = GetComponentInChildren<AsteroidPool>();
+        if (asteroid != null) asteroid.Initialize();
     }
 
     // 풀에서 오브젝트 가져오는 함수들 ------------------------------------------------------------------
@@ -49,5 +53,10 @@ public class Factory : Singleton<Factory>
     public Explosion GetExplosion(Vector3? position)
     {
         return explosion.GetObject(position);
+    }
+
+    public Asteroid GetAsteroid(Vector3? position)
+    {
+        return asteroid.GetObject(position);
     }
 }
