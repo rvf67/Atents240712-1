@@ -19,6 +19,11 @@ public class Background : Scrolling
 
         // 0.0 ~ 1.0 사이의 랜덤값을 받아와서 확인
         float rand = Random.value;
-        spriteRenderers[index].flipX = rand < 0.5f;
+        spriteRenderers[index * 2].flipX = rand < 0.5f;
+        rand = Random.value;
+        spriteRenderers[index * 2 + 1].flipX = rand < 0.5f;
+
+        // Debug.Log(spriteRenderers[index * 2].transform.parent.gameObject.name);
+        // Debug.Log(spriteRenderers[index * 2 + 1].transform.parent.gameObject.name);
     }
 }
