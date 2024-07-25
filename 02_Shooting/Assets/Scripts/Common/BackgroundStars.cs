@@ -2,24 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundStars : Background
+public class BackgroundStars : Scrolling
 {
     // 실습
     // 오른쪽 끝으로 이동할 때 SpriteRenderer의 flipX와 flipY가 랜덤하게 변경된다.
-    SpriteRenderer[] spriteRenderers;
 
     protected override void Awake()
     {
         base.Awake();   // 부모인 Background의 Awake함수 실행
 
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();    // 자식에 있는 스프라이트 랜더러 모두 찾기
-
+        baseLineX = transform.position.x - slotWidth * 0.5f;    // Stars는 피봇이 가운데 있기 때문에 절반만 이동
     }
 
-    protected override void MoveRightEnd(int index)
+    protected override void OnMoveRightEnd(int index)
     {
-        base.MoveRightEnd(index);
-
         int rand = Random.Range(0, 4);  // 0~3 사이의 값을 랜덤으로 구하기( 나올 수 있는 경우의 수는 4가지이기 때문)
 
         // rand =  0(0b_00), 1(0b_01), 2(0b_10), 3(0b_11) 중 하나
