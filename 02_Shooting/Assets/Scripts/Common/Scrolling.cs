@@ -47,8 +47,6 @@ public class Scrolling : MonoBehaviour
             // 스프라이트의 가로길이와 pixelPerUnit을 이용해, UnityUnit으로 길이가 얼마가 되는지 계산
             slotWidth = sprite.texture.width / sprite.pixelsPerUnit;
         }
-
-        
     }
 
     private void Update()
