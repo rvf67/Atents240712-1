@@ -10,6 +10,7 @@ public class Factory : Singleton<Factory>
     ExplosionEffectPool explosion;
     OldAsteroidPool asteroid;
     EnemyWavePool enemyWave;
+    EnemyAsteroidBigPool enemyAsteroidBig;
 
     protected override void OnInitialize()
     {
@@ -35,6 +36,10 @@ public class Factory : Singleton<Factory>
 
         enemyWave = GetComponentInChildren<EnemyWavePool>();
         if (enemyWave != null) enemyWave.Initialize();
+
+        enemyAsteroidBig = GetComponentInChildren<EnemyAsteroidBigPool>();
+        if (enemyAsteroidBig != null) enemyAsteroidBig.Initialize();
+
     }
 
     // 풀에서 오브젝트 가져오는 함수들 ------------------------------------------------------------------
@@ -44,7 +49,7 @@ public class Factory : Singleton<Factory>
         return bullet.GetObject(position, new Vector3(0, 0, angle));
     }
 
-    public EnemyOld GetEnemy(Vector3? position, float angle = 0.0f)
+    public OldEnemy GetEnemy(Vector3? position, float angle = 0.0f)
     {
         return enemy.GetObject(position, new Vector3(0, 0, angle));
     }
@@ -59,7 +64,7 @@ public class Factory : Singleton<Factory>
         return explosion.GetObject(position);
     }
 
-    public AsteroidOld GetAsteroid(Vector3? position)
+    public OldAsteroid GetAsteroid(Vector3? position)
     {
         return asteroid.GetObject(position);
     }
@@ -67,5 +72,25 @@ public class Factory : Singleton<Factory>
     public EnemyWave GetEnemyWave(Vector3? position)
     {
         return enemyWave.GetObject(position);
+    }
+
+    /// <summary>
+    /// 큰 운석 하나를 돌려주는 함수
+    /// </summary>
+    /// <param name="position">생성위치</param>
+    /// <param name="direction">이동 방향</param>
+    /// <param name="angle">초기각도(디폴트값을 사용하면 0~360도 사이의 랜덤한 각도)</param>
+    /// <returns>큰 운석 하나</returns>
+    public EnemyAsteroidBig GetAsteroidBig(Vector3? position, Vector3? direction = null, float? angle = null)
+    {
+        // direction이 null이면 Vector3.left 값을 사용, null이 아니면 direction이 들어있는 값을 사용.
+        Vector3 dir = direction ?? Vector3.left;            // 이동방향 지정         
+        Vector3 euler = Vector3.zero;
+        euler.z =  angle ?? Random.Range(0.0f, 360.0f);     // 초기 회전 정도 지정
+
+        EnemyAsteroidBig big = enemyAsteroidBig.GetObject(position, euler);
+        big.SetDestination(dir);
+
+        return big;
     }
 }

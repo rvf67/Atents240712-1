@@ -81,7 +81,7 @@ public class EnemyBase : RecycleObject
     }
 
     /// <summary>
-    /// Enemy의 종류별로 이동처리를 하는 함수
+    /// Enemy의 종류별로 이동처리를 하는 함수(기본적으로 왼쪽으로만 이동)
     /// </summary>
     /// <param name="deltaTime">Time.deltaTime</param>
     protected virtual void OnMoveUpdate(float deltaTime)

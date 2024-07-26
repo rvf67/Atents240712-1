@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyOld : RecycleObject
+public class OldEnemy : RecycleObject
 {
     /// <summary>
     /// 적의 수명

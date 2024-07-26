@@ -13,7 +13,7 @@ public class AsteroidSpawner : EnemySpawner
 
     protected override void Spawn()
     {
-        AsteroidOld asteroid = Factory.Instance.GetAsteroid(GetSpawnPosition());
+        OldAsteroid asteroid = Factory.Instance.GetAsteroid(GetSpawnPosition());
         asteroid.SetDestination(GetDestination());
     }
 
