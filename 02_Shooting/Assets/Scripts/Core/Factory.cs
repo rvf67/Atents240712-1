@@ -40,7 +40,7 @@ public class Factory : Singleton<Factory>
         return bullet.GetObject(position, new Vector3(0, 0, angle));
     }
 
-    public Enemy GetEnemy(Vector3? position, float angle = 0.0f)
+    public EnemyOld GetEnemy(Vector3? position, float angle = 0.0f)
     {
         return enemy.GetObject(position, new Vector3(0, 0, angle));
     }
@@ -55,7 +55,7 @@ public class Factory : Singleton<Factory>
         return explosion.GetObject(position);
     }
 
-    public Asteroid GetAsteroid(Vector3? position)
+    public AsteroidOld GetAsteroid(Vector3? position)
     {
         return asteroid.GetObject(position);
     }

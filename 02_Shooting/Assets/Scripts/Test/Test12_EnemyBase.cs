@@ -2,6 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidPool : ObjectPool<AsteroidOld>
+public class Test12_EnemyBase : TestBase
 {
 }

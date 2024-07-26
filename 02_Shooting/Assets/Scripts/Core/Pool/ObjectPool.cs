@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static Unity.Burst.Intrinsics.X86.Avx;
 
 // 오브젝트 풀
 // 특정 종류의 오브젝트(prefab)를 시작 시점에 대량(poolSize)으로 생성하고 요청받았을 때 하나씩 제공하는 클래스
