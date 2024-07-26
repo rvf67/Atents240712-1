@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -51,6 +52,11 @@ public class EnemyBase : RecycleObject
         }
     }
 
+    /// <summary>
+    /// 자신이 죽었음을 알리는 델리게이트(int : 자신의 점수)
+    /// </summary>
+    public Action<int> onDie;
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -91,9 +97,7 @@ public class EnemyBase : RecycleObject
         if (isAlive) // 살아있을 때만 죽을 수 있음
         {
             isAlive = false;            // 죽었다고 표시
-
-            ScoreText scoreText = FindAnyObjectByType<ScoreText>();
-            scoreText.AddScore(point);   // 점수 증가
+            onDie?.Invoke(point);       // 죽었다고 등록된 객체들에게 알리기(등록된 함수 실행)
 
             Factory.Instance.GetExplosion(transform.position);
 

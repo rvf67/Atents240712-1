@@ -5,10 +5,11 @@ using UnityEngine;
 public class Factory : Singleton<Factory>
 {
     BulletPool bullet;
-    EnemyPool enemy;
+    OldEnemyPool enemy;
     HitEffectPool hit;
     ExplosionEffectPool explosion;
-    AsteroidPool asteroid;
+    OldAsteroidPool asteroid;
+    EnemyWavePool enemyWave;
 
     protected override void OnInitialize()
     {
@@ -17,7 +18,7 @@ public class Factory : Singleton<Factory>
         if (bullet != null)
             bullet.Initialize();
 
-        enemy = GetComponentInChildren<EnemyPool>();
+        enemy = GetComponentInChildren<OldEnemyPool>();
         if (enemy != null)
             enemy.Initialize();
 
@@ -29,8 +30,11 @@ public class Factory : Singleton<Factory>
         if (explosion != null) 
             explosion.Initialize();
 
-        asteroid = GetComponentInChildren<AsteroidPool>();
+        asteroid = GetComponentInChildren<OldAsteroidPool>();
         if (asteroid != null) asteroid.Initialize();
+
+        enemyWave = GetComponentInChildren<EnemyWavePool>();
+        if (enemyWave != null) enemyWave.Initialize();
     }
 
     // 풀에서 오브젝트 가져오는 함수들 ------------------------------------------------------------------
@@ -58,5 +62,10 @@ public class Factory : Singleton<Factory>
     public AsteroidOld GetAsteroid(Vector3? position)
     {
         return asteroid.GetObject(position);
+    }
+
+    public EnemyWave GetEnemyWave(Vector3? position)
+    {
+        return enemyWave.GetObject(position);
     }
 }

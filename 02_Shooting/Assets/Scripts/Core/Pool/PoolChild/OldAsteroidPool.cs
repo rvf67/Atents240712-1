@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 
-public class EnemyPool : ObjectPool<EnemyOld>
+public class OldAsteroidPool : ObjectPool<AsteroidOld>
 {
 }
