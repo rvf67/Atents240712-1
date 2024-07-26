@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBase : RecycleObject
@@ -67,6 +68,7 @@ public class EnemyBase : RecycleObject
     private void Update()
     {
         OnMoveUpdate(Time.deltaTime);
+        OnVisualUpdate(Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -91,9 +93,15 @@ public class EnemyBase : RecycleObject
     }
 
     /// <summary>
+    /// Enemy 종류별로 비주얼 변경 처리를 하는 함수(빈함수)
+    /// </summary>
+    /// <param name="deltaTime"></param>
+    protected virtual void OnVisualUpdate(float deltaTime) { }
+
+    /// <summary>
     /// 적이 터질 때 실행될 함수
     /// </summary>
-    void OnDie()
+    protected void OnDie()
     {
         if (isAlive) // 살아있을 때만 죽을 수 있음
         {

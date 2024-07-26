@@ -78,18 +78,18 @@ public class Factory : Singleton<Factory>
     /// 큰 운석 하나를 돌려주는 함수
     /// </summary>
     /// <param name="position">생성위치</param>
-    /// <param name="direction">이동 방향</param>
+    /// <param name="targetPosition">이동할 목적지</param>
     /// <param name="angle">초기각도(디폴트값을 사용하면 0~360도 사이의 랜덤한 각도)</param>
     /// <returns>큰 운석 하나</returns>
-    public EnemyAsteroidBig GetAsteroidBig(Vector3? position, Vector3? direction = null, float? angle = null)
+    public EnemyAsteroidBig GetAsteroidBig(Vector3? position, Vector3? targetPosition = null, float? angle = null)
     {
         // direction이 null이면 Vector3.left 값을 사용, null이 아니면 direction이 들어있는 값을 사용.
-        Vector3 dir = direction ?? Vector3.left;            // 이동방향 지정         
+        Vector3 target = targetPosition ?? (position.GetValueOrDefault() + Vector3.left);   // 이동방향 지정
         Vector3 euler = Vector3.zero;
         euler.z =  angle ?? Random.Range(0.0f, 360.0f);     // 초기 회전 정도 지정
 
         EnemyAsteroidBig big = enemyAsteroidBig.GetObject(position, euler);
-        big.SetDestination(dir);
+        big.SetDestination(target);
 
         return big;
     }
