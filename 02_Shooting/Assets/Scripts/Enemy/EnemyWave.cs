@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyWave : EnemyBase
 {
+    [Header("Wave 적 데이터")]
     /// <summary>
     /// 사인 그래프가 한번 왕복하는데 걸리는 시간 증폭용(커질수록 왕복 속도가 빨라진다)
     /// </summary>

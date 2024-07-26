@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class EnemyBase : RecycleObject
 {
+    [Header("적 기본 데이터")]
     /// <summary>
     /// 적의 수명
     /// </summary>

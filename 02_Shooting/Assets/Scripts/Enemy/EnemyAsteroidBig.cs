@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAsteroidBig : EnemyBase
 {
+    [Header("큰 운석 데이터")]
     /// <summary>
     /// 최소 이동 속도
     /// </summary>
@@ -53,6 +54,10 @@ public class EnemyAsteroidBig : EnemyBase
         transform.Rotate(0, 0, deltaTime * rotateSpeed);
     }
 
+    /// <summary>
+    /// 목적지 설정하는 함수
+    /// </summary>
+    /// <param name="destination">목적지(월드좌표)</param>
     public void SetDestination(Vector3 destination)
     {
         direction = (destination - transform.position).normalized;
@@ -64,3 +69,6 @@ public class EnemyAsteroidBig : EnemyBase
         Gizmos.DrawLine(transform.position, transform.position + direction);
     }
 }
+
+// 자폭
+// 죽을 때 작은 운석 생성(랜덤한 개수)
