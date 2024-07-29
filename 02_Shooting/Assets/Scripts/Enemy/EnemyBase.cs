@@ -49,7 +49,7 @@ public class EnemyBase : RecycleObject
             hp = value;
             if (hp < 1)      // 0이되면
             {
-                OnDie();    // 사망 처리 수행
+                Die();    // 사망 처리 수행
             }
         }
     }
@@ -101,7 +101,7 @@ public class EnemyBase : RecycleObject
     /// <summary>
     /// 적이 터질 때 실행될 함수
     /// </summary>
-    protected void OnDie()
+    protected void Die()
     {
         if (isAlive) // 살아있을 때만 죽을 수 있음
         {
@@ -110,7 +110,16 @@ public class EnemyBase : RecycleObject
 
             Factory.Instance.GetExplosion(transform.position);
 
+            OnDie();
+
             DisableTimer();     // 자신을 비활성화 시키기
         }
+    }
+
+    /// <summary>
+    /// 죽었을 때 적의 종류별로 실행해야 할 일을 수행하는 함수(빈함수)
+    /// </summary>
+    protected virtual void OnDie()
+    {
     }
 }

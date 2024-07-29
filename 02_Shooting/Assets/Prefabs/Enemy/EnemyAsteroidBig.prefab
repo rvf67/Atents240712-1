@@ -166,6 +166,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  minSmallCount: 3
+  maxSmallCount: 8
+  criticalRate: 0.05
+  criticalMultiplier: 3
 --- !u!58 &3454049689730073730
 CircleCollider2D:
   m_ObjectHideFlags: 0

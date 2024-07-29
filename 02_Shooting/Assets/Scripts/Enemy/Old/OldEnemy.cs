@@ -101,7 +101,7 @@ public class OldEnemy : RecycleObject
         //hp--;
         //if (hp <= 0)
         //{
-        //    OnDie();
+        //    Die();
         //}
         HP--;        //HP = HP - 1;  // HP를 get한 다음 -1을 처리하고 다시 set하기
     }
