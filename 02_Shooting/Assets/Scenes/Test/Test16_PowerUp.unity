@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  directionChangeInterval: 1
+  directionChangeInterval: 3
   directionChangeMaxCount: 5
   fleeChange: 0.7
 --- !u!95 &114422941

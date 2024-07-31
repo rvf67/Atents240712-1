@@ -18,7 +18,7 @@ public class PowerUp : RecycleObject
     /// <summary>
     /// 방향 전환되는 시간 간격
     /// </summary>
-    public float directionChangeInterval = 1.0f;
+    public float directionChangeInterval = 3.0f;
 
     /// <summary>
     /// 방향 전환이 가능한 최대 회수
@@ -45,11 +45,6 @@ public class PowerUp : RecycleObject
     /// </summary>
     Transform playerTransform;
 
-    /// <summary>
-    /// 일정 시간 후에 방향을 전환하는 코루틴 저장용 변수
-    /// </summary>
-    IEnumerator directionChangeCoroutine;
-
     int DirectionChangeCount
     {
         get => directionChangeCount;
@@ -57,10 +52,13 @@ public class PowerUp : RecycleObject
         {
             directionChangeCount = value;
 
-            StopCoroutine(directionChangeCoroutine);
+            StopAllCoroutines();    // 이전 코루틴 제거용(벽에 부딪쳤을 때 대비), 수명은 의미없어짐
 
-            // DirectionChange 코루틴 실행
-            StartCoroutine(directionChangeCoroutine);
+            // 방향전환할 회수가 남아있고, 활성화되어있으면
+            if (directionChangeCount > 0 && gameObject.activeSelf)
+            {
+                StartCoroutine(DirectionChange());  // DirectionChange 코루틴 실행
+            }
         }
     }
 
@@ -69,11 +67,6 @@ public class PowerUp : RecycleObject
         playerTransform = GameManager.Instance.Player.transform;
         direction = Vector3.zero;
         DirectionChangeCount = directionChangeMaxCount;
-    }
-
-    private void Awake()
-    {
-        directionChangeCoroutine = DirectionChange();
     }
 
     private void Update()
@@ -109,6 +102,9 @@ public class PowerUp : RecycleObject
             // 플레이어에게 가까워지는 방향으로 설정
         }
         //direction;    // 방향 최종 결정
+        direction = Random.insideUnitCircle.normalized; // 임시
+        //Debug.Log($"방향 전환 : {direction}");
+
         DirectionChangeCount--;     // 방향 전환 회수 감소
     }
 }
