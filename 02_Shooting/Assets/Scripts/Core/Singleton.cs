@@ -103,7 +103,7 @@ public class Singleton<T> : MonoBehaviour where T : Component
     }
 
     /// <summary>
-    /// 싱글톤이 만들어지고 씬이 변경될 때마다 호출될 함수(Additive는 안됨)
+    /// 싱글톤이 만들어지고 씬이 변경될 때마다 호출될 함수(Additive는 안됨)(빈함수)
     /// </summary>
     protected virtual void OnInitialize()
     {

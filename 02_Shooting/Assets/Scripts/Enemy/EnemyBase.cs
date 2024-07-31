@@ -59,12 +59,6 @@ public class EnemyBase : RecycleObject
     /// </summary>
     public Action<int> onDie;
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        OnReset();
-    }
-
     private void Update()
     {
         OnMoveUpdate(Time.deltaTime);
@@ -76,7 +70,7 @@ public class EnemyBase : RecycleObject
         HP--;   // 부딪칠 때마다 HP감소(적끼리는 부딪치지 않는다)
     }
 
-    protected virtual void OnReset()
+    protected override void OnReset()
     {
         HP = maxHP;
         isAlive = true;

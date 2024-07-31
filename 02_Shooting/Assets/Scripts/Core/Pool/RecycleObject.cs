@@ -20,11 +20,20 @@ public class RecycleObject : MonoBehaviour
         transform.localRotation = Quaternion.identity;
 
         StopAllCoroutines();    // 이전에 실행 중이던 코루틴 모두 정지
+
+        OnReset();              // 각 클래스별 리셋 처리
     }
 
     protected virtual void OnDisable()
     {
         onDisable?.Invoke();    // onDisable이 null이 아니면 실행하라        
+    }
+
+    /// <summary>
+    /// 재활용 될 때 초기화 시키는 함수(빈함수)
+    /// </summary>
+    protected virtual void OnReset()
+    { 
     }
 
     /// <summary>
