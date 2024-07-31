@@ -6,9 +6,11 @@ using UnityEngine;
 public class Factory : Singleton<Factory>
 {
     BulletPool bullet;
-    OldEnemyPool enemy;
     HitEffectPool hit;
     ExplosionEffectPool explosion;
+    PowerUpPool powerUp;
+
+    OldEnemyPool enemy;
     OldAsteroidPool asteroid;
     EnemyWavePool enemyWave;
     EnemyAsteroidBigPool enemyAsteroidBig;
@@ -21,10 +23,6 @@ public class Factory : Singleton<Factory>
         if (bullet != null)
             bullet.Initialize();
 
-        enemy = GetComponentInChildren<OldEnemyPool>();
-        if (enemy != null)
-            enemy.Initialize();
-
         hit = GetComponentInChildren<HitEffectPool>();
         if (hit != null)
             hit.Initialize();
@@ -32,6 +30,13 @@ public class Factory : Singleton<Factory>
         explosion = GetComponentInChildren<ExplosionEffectPool>();
         if (explosion != null) 
             explosion.Initialize();
+
+        powerUp = GetComponentInChildren<PowerUpPool>();
+        if (powerUp != null) powerUp.Initialize();
+
+        enemy = GetComponentInChildren<OldEnemyPool>();
+        if (enemy != null)
+            enemy.Initialize();
 
         asteroid = GetComponentInChildren<OldAsteroidPool>();
         if (asteroid != null) asteroid.Initialize();
@@ -54,11 +59,6 @@ public class Factory : Singleton<Factory>
         return bullet.GetObject(position, new Vector3(0, 0, angle));
     }
 
-    public OldEnemy GetEnemy(Vector3? position, float angle = 0.0f)
-    {
-        return enemy.GetObject(position, new Vector3(0, 0, angle));
-    }
-
     public Explosion GetHitEffect(Vector3? position)
     {
         return hit.GetObject(position);
@@ -67,6 +67,16 @@ public class Factory : Singleton<Factory>
     public Explosion GetExplosion(Vector3? position)
     {
         return explosion.GetObject(position);
+    }
+
+    public PowerUp GetPowerUp(Vector3? position)
+    {
+        return powerUp.GetObject(position);
+    }
+
+    public OldEnemy GetEnemy(Vector3? position, float angle = 0.0f)
+    {
+        return enemy.GetObject(position, new Vector3(0, 0, angle));
     }
 
     public OldAsteroid GetAsteroid(Vector3? position)
