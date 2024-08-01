@@ -33,6 +33,11 @@ public class PowerUp : RecycleObject
     public float fleeChange = 0.7f;
 
     /// <summary>
+    /// 파워업 아이템을 최고 단계일 때 먹으면 얻는 보너스 점수
+    /// </summary>
+    public const int BonusPoint = 1000;
+
+    /// <summary>
     /// 현재 방향 남은 회수
     /// </summary>
     int directionChangeCount = 0;

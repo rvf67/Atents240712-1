@@ -44,9 +44,9 @@ public class Player : MonoBehaviour
     readonly int InputY_String = Animator.StringToHash("InputY");
 
     /// <summary>
-    /// 총알 발사용 트랜스폼
+    /// 총알 발사용 트랜스폼의 배열
     /// </summary>
-    Transform fireTransform;
+    Transform[] fireTransform;
 
     /// <summary>
     /// 총알 발사용 코루틴
@@ -64,6 +64,34 @@ public class Player : MonoBehaviour
     WaitForSeconds flashWait;
 
     /// <summary>
+    /// 파워의 최소값
+    /// </summary>
+    private const int MinPower = 1;
+
+    /// <summary>
+    /// 파워의 최대값
+    /// </summary>
+    private const int MaxPower = 3;
+
+    /// <summary>
+    /// 현재 파워
+    /// </summary>
+    int power = 1;
+
+    int Power
+    {
+        get => power;
+        set
+        {
+            // 변경이 있을 때만 처리
+            power = value;
+            // MaxPower보다 커졌으면 보너스 점수 얻기    //int bonus = PowerUp.BonusPoint;
+            // power는 MinPower ~ MaxPower 범위
+            // 발사 각도 변경
+        }
+    }
+
+    /// <summary>
     /// 리지드바디 컴포넌트
     /// </summary>
     Rigidbody2D rigid;
@@ -75,7 +103,12 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();        // 자신과 같은 게임오브젝트 안에 있는 컴포넌트 찾기        
         rigid = GetComponent<Rigidbody2D>();
 
-        fireTransform = transform.GetChild(0);          // 첫번째 자식 찾기
+        Transform fireRoot = transform.GetChild(0);     // 첫번째 자식 찾기
+        fireTransform = new Transform[fireRoot.childCount];
+        for (int i = 0; i < fireTransform.Length; i++)
+        {
+            fireTransform[i] = fireRoot.GetChild(i);    // 발사 위치 전부 찾기
+        }
         fireFlash = transform.GetChild(1).gameObject;   // 두번째 자식 찾아서 그 자식의 게임 오브젝트 저장하기
 
         fireCoroutine = FireCoroutine();            // 코루틴 저장하기
@@ -160,7 +193,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 총알을 한발 발사하는 함수
     /// </summary>
-    void Fire()
+    void Fire(Transform fire)
     {
         // 플래시 이팩트 잠깐 켜기
         StartCoroutine(FlashEffect());
@@ -172,7 +205,7 @@ public class Player : MonoBehaviour
         //Instantiate(bulletPrefab, fireTransform.position, fireTransform.rotation);  // 총알을 fireTransform의 위치와 회전에 따라 생성
 
         // 팩토리 사용
-        Factory.Instance.GetBullet(fireTransform.position, fireTransform.rotation.eulerAngles.z);
+        Factory.Instance.GetBullet(fire.position, fire.rotation.eulerAngles.z);
     }
 
     /// <summary>
@@ -186,7 +219,10 @@ public class Player : MonoBehaviour
         while (true) // 무한 루프
         {
             //Debug.Log("Fire");
-            Fire();
+            for(int i=0;i<Power;i++)
+            {
+                Fire(fireTransform[i]);
+            }
             yield return new WaitForSeconds(fireInterval);  // fireInterval초만큼 기다렸다가 다시 시작하기
         }
 
@@ -211,6 +247,11 @@ public class Player : MonoBehaviour
         if( collision.gameObject.CompareTag("Enemy") )  // 이쪽을 권장. ==에 비해 가비지가 덜 생성된다. 생성되는 코드도 훨씬 빠르게 구현되어 있음.
         {
             Debug.Log("적과 부딪쳤다.");
+        }
+        else if( collision.gameObject.CompareTag("PowerUp") )
+        {
+            Power++;
+            collision.gameObject.SetActive(false);
         }
     }
 }
