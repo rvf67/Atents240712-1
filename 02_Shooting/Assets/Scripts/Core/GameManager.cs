@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    /// <summary>
+    /// 플레이어
+    /// </summary>
     Player player;
+
+    /// <summary>
+    /// 점수 표시용 UI
+    /// </summary>
+    ScoreText scoreTextUI;
 
     /// <summary>
     /// 씬에 있는 플레이어에 접근하기 위한 프로퍼티(읽기전용)
@@ -15,14 +23,28 @@ public class GameManager : Singleton<GameManager>
         {
             if(player == null)
             {
-                OnInitialize(); // OnInitialize전에 호출되면 일단 초기화먼저 처리
+                player = FindAnyObjectByType<Player>();
             }
             return player;
+        }
+    }
+
+    public ScoreText ScoreText
+    {
+        get
+        {
+            if (scoreTextUI == null)
+            {
+                scoreTextUI = FindAnyObjectByType<ScoreText>();
+            }
+            return scoreTextUI;
         }
     }
 
     protected override void OnInitialize()
     {
         player = FindAnyObjectByType<Player>();
+
+        scoreTextUI = FindAnyObjectByType<ScoreText>();
     }
 }

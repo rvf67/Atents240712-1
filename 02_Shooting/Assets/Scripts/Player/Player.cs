@@ -24,6 +24,11 @@ public class Player : MonoBehaviour
     public GameObject bulletPrefab;
 
     /// <summary>
+    /// 총알 간의 사이각
+    /// </summary>
+    public float fireAngle = 30.0f;
+
+    /// <summary>
     /// 입력된 방향
     /// </summary>
     Vector3 inputDirection = Vector3.zero;
@@ -83,11 +88,23 @@ public class Player : MonoBehaviour
         get => power;
         set
         {
-            // 변경이 있을 때만 처리
-            power = value;
-            // MaxPower보다 커졌으면 보너스 점수 얻기    //int bonus = PowerUp.BonusPoint;
-            // power는 MinPower ~ MaxPower 범위
-            // 발사 각도 변경
+            if (power != value) // 변경이 있을 때만 처리
+            {
+                power = value;
+
+                if( power > MaxPower)
+                {
+                    // MaxPower보다 커졌으면 보너스 점수 얻기
+                    ScoreText scoreText = GameManager.Instance.ScoreText;
+                    scoreText.AddScore(PowerUp.BonusPoint);
+                }
+
+                // power는 MinPower ~ MaxPower 범위
+                power = Mathf.Clamp(power, MinPower, MaxPower);
+
+                // 발사 각도 변경
+                RefreshFireAngles();
+            }
         }
     }
 
@@ -152,6 +169,28 @@ public class Player : MonoBehaviour
 
         // transform.Translate(Time.fixedDeltaTime * moveSpeed * inputDirection);   // 한번은 파고 들어간다.
         rigid.MovePosition(rigid.position + Time.fixedDeltaTime * moveSpeed * (Vector2)inputDirection);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))  // 이쪽을 권장. ==에 비해 가비지가 덜 생성된다. 생성되는 코드도 훨씬 빠르게 구현되어 있음.
+        {
+            Debug.Log("적과 부딪쳤다.");
+        }
+        //else if (collision.gameObject.CompareTag("PowerUp"))
+        //{
+        //    Power++;
+        //    collision.gameObject.SetActive(false);
+        //}
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PowerUp"))
+        {
+            Power++;
+            collision.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -242,16 +281,34 @@ public class Player : MonoBehaviour
         fireFlash.SetActive(false);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void RefreshFireAngles()
     {
-        if( collision.gameObject.CompareTag("Enemy") )  // 이쪽을 권장. ==에 비해 가비지가 덜 생성된다. 생성되는 코드도 훨씬 빠르게 구현되어 있음.
+        for(int i=0;i<MaxPower; i++)
         {
-            Debug.Log("적과 부딪쳤다.");
-        }
-        else if( collision.gameObject.CompareTag("PowerUp") )
-        {
-            Power++;
-            collision.gameObject.SetActive(false);
+            if( i < Power )
+            {
+                // fireAngle이 30도 일 때
+                // 1 : 0도
+                // 2 : 15도, -15도
+                // 3 : 30도, 0도, -30도
+
+                // 회전 결정
+                float startAngle = (Power - 1) * (fireAngle * 0.5f);
+                float angleDelta = i * -fireAngle;
+                fireTransform[i].rotation = Quaternion.Euler(0, 0, startAngle + angleDelta);
+
+                // 약간 앞으로 옮기기
+                fireTransform[i].localPosition = Vector3.zero;
+                fireTransform[i].Translate(0.5f, 0, 0);
+
+                // 보일 부분
+                fireTransform[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                // 안보일 부분
+                fireTransform[i].gameObject.SetActive(false);
+            }
         }
     }
 }
