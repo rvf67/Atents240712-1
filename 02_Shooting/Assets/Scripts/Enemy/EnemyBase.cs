@@ -70,6 +70,9 @@ public class EnemyBase : RecycleObject
         HP--;   // 부딪칠 때마다 HP감소(적끼리는 부딪치지 않는다)
     }
 
+    /// <summary>
+    /// 적 기본 초기화 작업(재활용시)
+    /// </summary>
     protected override void OnReset()
     {
         HP = maxHP;

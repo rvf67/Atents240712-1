@@ -16,6 +16,7 @@ public class Factory : Singleton<Factory>
     EnemyAsteroidBigPool enemyAsteroidBig;
     EnemyAsteroidSmallPool enemyAsteroidSmall;
     EnemyCurvePool enemyCurve;
+    EnemyBonusPool enemyBonus;
 
     protected override void OnInitialize()
     {
@@ -54,6 +55,8 @@ public class Factory : Singleton<Factory>
         enemyCurve = GetComponentInChildren<EnemyCurvePool>();
         if (enemyCurve != null) enemyCurve.Initialize();
 
+        enemyBonus = GetComponentInChildren<EnemyBonusPool>();
+        if (enemyBonus != null) enemyBonus.Initialize();
     }
 
     // 풀에서 오브젝트 가져오는 함수들 ------------------------------------------------------------------
@@ -142,5 +145,15 @@ public class Factory : Singleton<Factory>
         curve.UpdateRotateDirection();
 
         return curve;
+    }
+
+    /// <summary>
+    /// 보너스 주는 적 하나를 돌려주는 함수
+    /// </summary>
+    /// <param name="position">생성 위치</param>
+    /// <returns></returns>
+    public EnemyBonus GetEnemyBonus(Vector3? position)
+    {
+        return enemyBonus.GetObject(position);
     }
 }

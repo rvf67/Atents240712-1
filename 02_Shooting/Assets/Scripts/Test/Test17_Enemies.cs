@@ -16,4 +16,8 @@ public class Test17_Enemies : TestBase
         Factory.Instance.GetEnemyCurve(target.position);
     }
 
+    protected override void OnTest2(InputAction.CallbackContext context)
+    {
+        Factory.Instance.GetEnemyBonus(target.position);
+    }
 }
