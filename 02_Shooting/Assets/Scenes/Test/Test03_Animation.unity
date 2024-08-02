@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 1812785075}
   - component: {fileID: 1812785074}
   - component: {fileID: 1812785077}
+  - component: {fileID: 1812785078}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -440,6 +441,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  fireInterval: 0.5
+  bulletPrefab: {fileID: 0}
+  fireAngle: 30
+--- !u!50 &1812785078
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812785073}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &1485757030139036909
 PrefabInstance:
   m_ObjectHideFlags: 0

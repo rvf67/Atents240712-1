@@ -15,6 +15,7 @@ public class Factory : Singleton<Factory>
     EnemyWavePool enemyWave;
     EnemyAsteroidBigPool enemyAsteroidBig;
     EnemyAsteroidSmallPool enemyAsteroidSmall;
+    EnemyCurvePool enemyCurve;
 
     protected override void OnInitialize()
     {
@@ -49,6 +50,9 @@ public class Factory : Singleton<Factory>
 
         enemyAsteroidSmall = GetComponentInChildren<EnemyAsteroidSmallPool>();
         if (enemyAsteroidSmall != null) enemyAsteroidSmall.Initialize();
+
+        enemyCurve = GetComponentInChildren<EnemyCurvePool>();
+        if (enemyCurve != null) enemyCurve.Initialize();
 
     }
 
@@ -125,5 +129,18 @@ public class Factory : Singleton<Factory>
         small.Direction = direction ?? Vector3.left;        // 이동방향 지정
 
         return small;
+    }
+
+    /// <summary>
+    /// 커브도는 적 하나를 돌려주는 함수
+    /// </summary>
+    /// <param name="position">생성 위치</param>
+    /// <returns></returns>
+    public EnemyCurve GetEnemyCurve(Vector3? position)
+    {
+        EnemyCurve curve = enemyCurve.GetObject(position);
+        curve.UpdateRotateDirection();
+
+        return curve;
     }
 }
